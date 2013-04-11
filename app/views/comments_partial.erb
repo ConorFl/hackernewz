@@ -1,0 +1,19 @@
+ <div id="comments">
+  <% @comments.reverse.each do |comment| %>
+    <p><%= comment.body %> by <%=comment.user.name%> 
+    <% comment.comment_votes.each do |x| %>
+      <% @voted = false %>
+      <%if x.user.id == session[:current_user_id]%>
+        <% @voted = true %>
+      <% end %>
+    <% end %>
+    
+    <% if !@voted %>
+    <a href='/up_comments/<%=comment.id%>'>+1</a> 
+    <%end %>
+    </p>
+    <% votes = 0 %>
+    <% comment.comment_votes.each {|x| votes += x.value} %>
+    <%= votes %> votes
+  <% end %>
+  </div>

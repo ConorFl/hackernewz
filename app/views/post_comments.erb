@@ -1,0 +1,34 @@
+<div class="container">
+  <h2><%=@post.title %></h2> written by <%= @post.user.name %>
+  <p><%=@post.body %></p>
+  <%=@post.comments.count%> comments
+  <form id="comment_submit2" action='/commenSts/<%=@post.id%>' method ='post'>
+    <input type="hidden" name="postid" value=<%=@post.id%> >
+    <textarea rows="4" cols="50" name='comment_body'></textarea><br><br>
+    <input type="submit" name="comment_submit" value="add comment">
+  </form>
+</div>
+<% if @comments %>
+ 
+  <div class="container">
+ <div id="comments">
+  <% @comments.reverse.each do |comment| %>
+    <p><%= comment.body %> by <%=comment.user.name%> 
+    <% comment.comment_votes.each do |x| %>
+      <% @voted = false %>
+      <%if x.user.id == session[:current_user_id]%>
+        <% @voted = true %>
+      <% end %>
+    <% end %>
+    
+    <% if !@voted %>
+    <a href='/up_comments/<%=comment.id%>'>+1</a> 
+    <%end %>
+    </p>
+    <% votes = 0 %>
+    <% comment.comment_votes.each {|x| votes += x.value} %>
+    <%= votes %> votes
+  <% end %>
+  </div>
+</div>
+ <% end %>

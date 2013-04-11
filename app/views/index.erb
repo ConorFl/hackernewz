@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Hacker News</h1>
+  <% @posts.each do |post| %>
+    <% votes = 0 %>
+    <% @voted = false %>
+
+    <% post.post_votes.each do |x|%> 
+      <% votes += x.value %>
+      <%@voted = true if x.user_id == session[:current_user_id]%>
+    <% end %>
+    <%= "<a href='/up_posts/#{post.id}'>+1</a>" if !@voted %>
+  <%= votes %> votes <a href='/post/<%=post.id%>'><%= post.title %></a> 
+  <a href='/comments/<%=post.id%>'>comments</a> <br>
+
+  <% end%>
+</div>
+

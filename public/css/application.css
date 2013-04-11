@@ -1,0 +1,16 @@
+.container {
+  margin: 20px auto;
+  width: 500px;
+  padding: 0px 20px 20px 20px;
+  border: 1px dotted black;  
+}
+th {
+  text-align: left;
+}
+
+.h1 {
+ border=0px;
+ width =100%;
+ padding= 2px;
+ background= black;
+}
